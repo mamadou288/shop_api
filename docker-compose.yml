@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Service PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: shopapi_db
+    environment:
+      POSTGRES_DB: shop_db
+      POSTGRES_USER: shop_user
+      POSTGRES_PASSWORD: shop_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shop_user -d shop_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Service Django API
+  web:
+    build: .
+    container_name: shopapi_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+# Volumes (stockage persistant)
+volumes:
+  postgres_data:
+    driver: local
+
