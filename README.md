@@ -139,6 +139,34 @@ E-commerce/
 
 ---
 
+## 📊 Dashboard Analytics (Streamlit)
+
+Dashboard interactif pour visualiser les KPIs e-commerce en temps réel.
+
+### Features
+
+- **📊 Overview** - Vue d'ensemble des métriques clés
+- **💰 Business** - Revenue, AOV, CLV, croissance MoM
+- **📦 Products** - Top products, alertes stock, inventory
+- **👥 Users** - Acquisition, rétention, segmentation
+
+### Installation
+
+```bash
+# Installer les dépendances
+cd dashboard
+pip install -r requirements.txt
+
+# Lancer le dashboard
+streamlit run app.py
+```
+
+Le dashboard s'ouvre sur `http://localhost:8501`.
+
+**Prérequis** : L'API Django doit tourner sur `http://localhost:8000`.
+
+📖 Documentation complète : `dashboard/README.md`
+
 ---
 
 ## Documentation technique

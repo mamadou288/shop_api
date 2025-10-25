@@ -55,3 +55,6 @@ docker-compose.override.yml
 # Media files (future AWS S3 implementation)
 /media
 
+# Streamlit
+.streamlit/secrets.toml
+
