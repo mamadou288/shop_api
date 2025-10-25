@@ -14,6 +14,8 @@ Construction d'une API backend e-commerce complète avec :
 - ✅ Système de traitement des commandes
 - ✅ Authentification JWT sécurisée
 - ✅ Permissions admin et client
+- ✅ Business Intelligence & KPIs (Analytics)
+- ✅ Management command pour générer données de test
 - 🚧 Gestion du panier d'achat (à venir)
 - 🚧 Intégration de paiement Stripe (à venir)
 - 🚧 Gestion d'images avec AWS S3 (à venir)
@@ -58,6 +60,9 @@ docker-compose exec web python manage.py migrate
 # Créer un superuser
 docker-compose exec web python manage.py createsuperuser
 
+# Générer des données de test (optionnel)
+docker-compose exec web python manage.py generate_sample_data --users 300 --products 200 --orders 1000
+
 # L'API est accessible sur http://localhost:8000
 ```
 
@@ -88,6 +93,11 @@ E-commerce/
 │   ├── views/           # Views API (CRUD + Actions)
 │   ├── admin.py         # Admin avec badges colorés
 │   └── docs/            # Documentation technique
+├── analytics/            # App business intelligence & KPIs
+│   ├── services/        # Business, Product, User KPIs
+│   ├── views/           # API endpoints avec cache
+│   ├── urls.py          # Routes API
+│   └── docs/            # Documentation KPIs
 ├── requirements.txt      # Dépendances Python
 ├── docker-compose.yml    # Configuration Docker
 └── README.md
@@ -121,6 +131,12 @@ E-commerce/
 - `POST /api/orders/{uuid}/ship/` - Expédier (admin)
 - `POST /api/orders/{uuid}/deliver/` - Livrer (admin)
 
+### Analytics (Admin uniquement)
+- `GET /api/analytics/dashboard/` - Tous les KPIs (business, products, users)
+- `GET /api/analytics/business/` - KPIs business (revenue, AOV, growth, CLV)
+- `GET /api/analytics/products/` - KPIs produits (top products, stock alerts)
+- `GET /api/analytics/users/` - KPIs utilisateurs (active, retention, segments)
+
 ---
 
 ---
@@ -132,9 +148,11 @@ Chaque app contient sa propre documentation dans le dossier `docs/` :
 - `accounts/docs/` - Documentation authentification et utilisateurs
 - `products/docs/` - Documentation catalogue produits
 - `orders/docs/` - Documentation gestion commandes
+- `analytics/docs/` - Documentation KPIs et business intelligence
 
 **Tests API :**
 - Voir `orders/TESTING.md` pour les exemples de requêtes
+- Voir `analytics/TESTING.md` pour tester les KPIs
 
 ---
 

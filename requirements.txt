@@ -19,3 +19,6 @@ drf-spectacular==0.26.5
 
 django-filter==23.5
 django-cors-headers==4.3.1
+
+# Fake data 
+Faker==20.1.0

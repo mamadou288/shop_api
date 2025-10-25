@@ -13,4 +13,7 @@ urlpatterns = [
     
     # Orders
     path('api/orders/', include('orders.urls')),
+    
+    # Analytics
+    path('api/analytics/', include('analytics.urls')),
 ]

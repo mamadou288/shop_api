@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'orders',
+    'analytics',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CORS_ALLOW_ALL_ORIGINS = True  # TODO: Restrict to specific origins in production
 
+# Cache configuration (for analytics KPIs)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'shop-analytics-cache',
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
