@@ -7,4 +7,7 @@ urlpatterns = [
     
     # API Authentication
     path('api/auth/', include('accounts.urls')),
+    
+    # API Products (categories + products)
+    path('api/', include('products.urls')),
 ]
